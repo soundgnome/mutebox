@@ -19,7 +19,10 @@ class X11Handler:
 
 
     def mute(self) -> None:
-        popen(self._command)
+        if self._command is None:
+            print('toggle mute')
+        else:
+            popen(self._command)
 
 
     def _set_command(self, words: list) -> None:
@@ -27,4 +30,5 @@ class X11Handler:
             self._command = 'xdotool windowactivate %s && xdotool key --window %s alt+a' \
                 % (words[0], words[0])
         else:
-            raise Exception('Window %s not recognized' % words)
+            print('Window "%s" not recognized' % ' '.join(words[1:]))
+            self._command = None
