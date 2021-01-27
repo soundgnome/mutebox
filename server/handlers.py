@@ -29,6 +29,9 @@ class X11Handler:
         if 'Zoom' in words:
             self._command = 'xdotool windowactivate %s && xdotool key --window %s alt+a' \
                 % (words[0], words[0])
+        elif 'Meet' in words:
+            self._command = 'xdotool windowactivate %s && xdotool key --window %s ctrl+d' \
+                % (words[0], words[0])
         else:
             print('Window "%s" not recognized' % ' '.join(words[1:]))
             self._command = None
