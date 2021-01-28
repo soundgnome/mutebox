@@ -32,8 +32,8 @@ class X11Handler:
             'xdotool windowactivate $active'
 
         hotkey_apps = (
-            ('Zoom', 'Zoom', 'alt-a'),
-            ('Meet', 'Google Meet', 'alt-d'),
+            ('Zoom', 'Zoom', 'alt+a'),
+            ('Meet', 'Google Meet', 'alt+d'),
             ('Teams', 'Microsoft Teams', 'ctrl+M'),
         )
         for app in hotkey_apps:
