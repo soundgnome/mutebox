@@ -26,12 +26,21 @@ class X11Handler:
 
 
     def _set_command(self, words: list) -> None:
-        if 'Zoom' in words:
-            self._command = 'xdotool windowactivate %s && xdotool key --window %s alt+a' \
-                % (words[0], words[0])
-        elif 'Meet' in words:
-            self._command = 'xdotool windowactivate %s && xdotool key --window %s ctrl+d' \
-                % (words[0], words[0])
-        else:
-            print('Window "%s" not recognized' % ' '.join(words[1:]))
-            self._command = None
+        hotkey_command = 'active=$(xdotool getactivewindow) && ' \
+            'xdotool windowactivate %s && ' \
+            'xdotool key --window %s %s && ' \
+            'xdotool windowactivate $active'
+
+        hotkey_apps = (
+            ('Zoom', 'Zoom', 'alt-a'),
+            ('Meet', 'Google Meet', 'alt-d'),
+            ('Teams', 'Microsoft Teams', 'ctrl+M'),
+        )
+        for app in hotkey_apps:
+            if app[0] in words:
+                self._command = hotkey_command % (words[0], words[0], app[2])
+                print('%s detected, using %s' % app[1:])
+                return
+
+        print('Window "%s" not recognized' % ' '.join(words[1:]))
+        self._command = None
