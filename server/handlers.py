@@ -33,7 +33,7 @@ class X11Handler:
 
         hotkey_apps = (
             ('Zoom', 'Zoom', 'alt+a'),
-            ('Meet', 'Google Meet', 'alt+d'),
+            ('Meet', 'Google Meet', 'ctrl+d'),
             ('Teams', 'Microsoft Teams', 'ctrl+M'),
         )
         for app in hotkey_apps:
